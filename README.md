@@ -1,5 +1,5 @@
 # tinyPXE
-A dockerized PXE server using DNSMASQ.
+A containerized PXE server using DNSMASQ.
 
 ## Prerequisites packages
 ```
