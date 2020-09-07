@@ -27,7 +27,7 @@ podman run --rm -it --privileged --net host -v "$(pwd)/tftpboot:/var/lib/tftpboo
 ```
 
 ##### PXE DHCP Server
-Set `dhcp-range` in `dnsmasq.conf.dhcpproxy`.  
+Set `dhcp-range` in `dnsmasq.conf.dhcpserver`.  
 Ex: `dhcp-range=192.168.56.10,192.168.56.200,12h`
 ```
 podman run --rm -it --privileged --net host -v "$(pwd)/tftpboot:/var/lib/tftpboot" -v "$(pwd)/dnsmasq.conf.dhcpserver:/etc/dnsmasq.conf" --security-opt label=disable --name=pxe localhost/kevydotvinu/pxe:v1 --interface=eth0
