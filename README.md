@@ -19,16 +19,34 @@ cd tinyPXE
 buildah bud --security-opt label=disable --tag localhost/kevydotvinu/pxe:v1 .
 ```
 
-### PXE Proxy
+### PXE-enabled Proxy-DHCP Server
 Set `dhcp-range` in `dnsmasq.conf.dhcpproxy`.  
-Ex: `dhcp-range=192.168.56.0,proxy` 
+Example: `dhcp-range=192.168.56.0,proxy` 
 ```
-podman run --rm -it --privileged --net host -v "$(pwd)/tftpboot:/var/lib/tftpboot" -v "$(pwd)/dnsmasq.conf.dhcpproxy:/etc/dnsmasq.conf" --security-opt label=disable --name=pxe localhost/kevydotvinu/pxe:v1 --interface=eth0
+podman run --rm \
+           --interactive \
+           --tty \
+           --privileged \
+           --net host \
+           --volume "$(pwd)/tftpboot:/var/lib/tftpboot" \
+           --volume "$(pwd)/dnsmasq.conf.dhcpproxy:/etc/dnsmasq.conf" \
+           --security-opt label=disable \
+           --name pxe localhost/kevydotvinu/pxe:v1 \
+           --interface eth0
 ```
 
-### PXE DHCP Server
+### PXE-enabled DHCP Server
 Set `dhcp-range` in `dnsmasq.conf.dhcpserver`.  
-Ex: `dhcp-range=192.168.56.10,192.168.56.200,12h`
+Example: `dhcp-range=192.168.56.10,192.168.56.200,12h`
 ```
-podman run --rm -it --privileged --net host -v "$(pwd)/tftpboot:/var/lib/tftpboot" -v "$(pwd)/dnsmasq.conf.dhcpserver:/etc/dnsmasq.conf" --security-opt label=disable --name=pxe localhost/kevydotvinu/pxe:v1 --interface=eth0
+podman run --rm \
+           --interactive \
+           --tty \
+           --privileged \
+           --net host \
+           --volume "$(pwd)/tftpboot:/var/lib/tftpboot" \
+           --volume "$(pwd)/dnsmasq.conf.dhcpserver:/etc/dnsmasq.conf" 
+           --security-opt label=disable \
+           --name pxe localhost/kevydotvinu/pxe:v1 \
+           --interface eth0
 ```
