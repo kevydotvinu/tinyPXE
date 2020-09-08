@@ -19,7 +19,7 @@ cd tinyPXE
 buildah bud --security-opt label=disable --tag localhost/kevydotvinu/pxe:v1 .
 ```
 
-### PXE-enabled Proxy-DHCP
+### PXE-enabled Proxy-DHCP Server
 Set `dhcp-range` in `dnsmasq.conf.dhcpproxy`.  
 Example: `dhcp-range=192.168.56.0,proxy` 
 ```
