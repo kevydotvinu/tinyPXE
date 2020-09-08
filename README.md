@@ -31,8 +31,8 @@ podman run --rm \
            --volume "$(pwd)/tftpboot:/var/lib/tftpboot" \
            --volume "$(pwd)/dnsmasq.conf.dhcpproxy:/etc/dnsmasq.conf" \
            --security-opt label=disable \
-           --name=pxe localhost/kevydotvinu/pxe:v1 \
-           --interface=eth0
+           --name pxe localhost/kevydotvinu/pxe:v1 \
+           --interface eth0
 ```
 
 ### PXE DHCP Server
@@ -47,6 +47,6 @@ podman run --rm \
            --volume "$(pwd)/tftpboot:/var/lib/tftpboot" \
            --volume "$(pwd)/dnsmasq.conf.dhcpserver:/etc/dnsmasq.conf" 
            --security-opt label=disable \
-           --name=pxe localhost/kevydotvinu/pxe:v1 \
-           --interface=eth0
+           --name pxe localhost/kevydotvinu/pxe:v1 \
+           --interface eth0
 ```
