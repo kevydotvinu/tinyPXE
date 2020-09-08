@@ -21,7 +21,7 @@ buildah bud --security-opt label=disable --tag localhost/kevydotvinu/pxe:v1 .
 
 ### PXE Proxy
 Set `dhcp-range` in `dnsmasq.conf.dhcpproxy`.  
-Ex: `dhcp-range=192.168.56.0,proxy` 
+Example: `dhcp-range=192.168.56.0,proxy` 
 ```
 podman run --rm \
            --interactive \
@@ -37,7 +37,7 @@ podman run --rm \
 
 ### PXE DHCP Server
 Set `dhcp-range` in `dnsmasq.conf.dhcpserver`.  
-Ex: `dhcp-range=192.168.56.10,192.168.56.200,12h`
+Example: `dhcp-range=192.168.56.10,192.168.56.200,12h`
 ```
 podman run --rm \
            --interactive \
