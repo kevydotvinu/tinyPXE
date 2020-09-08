@@ -21,6 +21,7 @@ buildah bud --security-opt label=disable --tag localhost/kevydotvinu/pxe:v1 .
 
 ### PXE-enabled Proxy-DHCP Server
 A Proxy-DHCP server can be run alongside an existing non-PXE DHCP server. The Proxy-DHCP server provides only the next server and boot filename options, leaving IP allocation to the DHCP server. Clients listen for both DHCP offers and merge the responses as though they had come from one PXE-enabled DHCP server.  
+
 Set `dhcp-range` in `dnsmasq.conf.dhcpproxy`.  
 Example: `dhcp-range=192.168.56.0,proxy`. 
 ```
