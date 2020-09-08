@@ -50,3 +50,10 @@ podman run --rm \
            --name pxe localhost/kevydotvinu/pxe:v1 \
            --interface eth0
 ```
+## iPXE manual booting
+Press <kbd>Ctrl</kbd> + <kbd>b</kbd> and enter below commands:
+```
+set net0/filename pxelinux.0
+set net0/next-server 192.168.56.X
+autoboot
+```
