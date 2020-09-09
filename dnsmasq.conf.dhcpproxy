@@ -4,8 +4,10 @@ except-interface=lo
 bind-interfaces
 log-dhcp
 log-queries
+enable-tftp
+tftp-root=/var/lib/tftpboot
 dhcp-range=192.168.56.0,proxy
 dhcp-boot=lpxelinux.0
 pxe-service=x86PC,"Network Boot",lpxelinux
-enable-tftp
-tftp-root=/var/lib/tftpboot
+# dhcp-boot=http://10.74.250.40/boot.ipxe
+# pxe-service=x86PC,"iPXE Script",http://10.74.250.40/boot.ipxe
