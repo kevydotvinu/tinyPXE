@@ -5,7 +5,7 @@ log-dhcp
 log-queries
 enable-tftp
 tftp-root=/var/lib/tftpboot
-dhcp-boot=pxelinux.0
+dhcp-boot=lpxelinux.0
 dhcp-range=192.168.56.10,192.168.56.200,12h
 dhcp-option-force=209,pxelinux.cfg/default
 dhcp-host=00:1e:68:c2:ff:ee,192.168.56.54,24h
