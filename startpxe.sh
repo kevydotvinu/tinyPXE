@@ -54,3 +54,4 @@ exit
 EOF
 make bin/undionly.kpxe EMBED=../../tftpboot/boot.ipxe
 cp bin/undionly.kpxe ../../tftpboot/
+chmod 664 ../../tftpboot/undionly.kpxe
