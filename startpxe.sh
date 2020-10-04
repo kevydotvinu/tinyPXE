@@ -16,11 +16,11 @@ firewall-cmd --reload
 buildah bud --security-opt label=disable --tag localhost/kevydotvinu/pxe:v1 .
 podman run --rm -it --privileged --net host -v "$(pwd)/tftpboot:/var/lib/tftpboot" -v "$(pwd)/dnsmasq.conf.dhcpproxy:/etc/dnsmasq.conf" --security-opt label=disable --name=pxe localhost/kevydotvinu/pxe:v1 --interface=vboxnet0
 
-### iPXE commands
-Ctrl+b
-set net0/filename pxelinux.0
-set net0/next-server X.X.X.X
-autoboot
+### Boot from iPXE boot script
+Press Ctrl+b to get to the iPXE prompt and type in the following commands:
+
+iPXE> dhcp
+iPXE> chain http://192.168.1.100/boot.ipxe
 
 ### Build undionly.kpxe with script embedded
 yum install -y xz-devel.x86_64

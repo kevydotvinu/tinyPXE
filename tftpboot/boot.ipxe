@@ -1,0 +1,51 @@
+#!ipxe
+
+set kernel http://192.168.1.2:8080/ipxe/rhcos-4.5.6-x86_64-installer-kernel-x86_64
+set initrd http://192.168.1.2:8080/ipxe/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
+set image http://192.168.1.2:8080/rhcos.raw.gz
+
+:start
+menu OpenShift Container Platform
+item --gap --             ---------------------- Cluster Installer -----------------------------
+item Bootstrap0 Bootstrap-0
+item Master0 Master-0
+item Worker0 Worker-0
+item --gap --             ----------------------------- Options ----------------------------------
+item exit Exit
+choose --timeout 20000 --default back target && goto ${target} || goto menu
+
+:Bootstrap0
+echo Booting Bootstrap-0
+set ignition http://192.168.1.2:8080/cl1/bootstrap.ign
+set ip ip=192.168.1.50::192.168.1.254:255.255.255.0:bootstrap-0.pnq.disconnected.cluster.redhatsupport:ens3:none
+set nameserver 192.168.1.2
+set device=sda
+kernel ${kernel} ip=${ip} nameserver=${nameserver} rd.neednet=1 initrd=${initrd} console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=${device} coreos.inst.image_url=${image} coreos.inst.ignition_url=${ignition}
+initrd ${initrd}
+boot || imgfree
+goto start
+
+:Master0
+echo Booting Master-0
+set ignition http://192.168.1.2:8080/cl1/master.ign
+set ip ip=192.168.1.50::192.168.1.254:255.255.255.0:master-0.pnq.disconnected.cluster.redhatsupport:ens3:none
+set nameserver 192.168.1.2
+set device=sda
+kernel ${kernel} ip=${ip} nameserver=${nameserver} rd.neednet=1 initrd=${initrd} console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=${device} coreos.inst.image_url=${image} coreos.inst.ignition_url=${ignition}
+initrd ${initrd}
+boot || imgfree
+goto start
+
+:Worker0
+echo Booting Woker-0
+set ignition http://192.168.1.2:8080/cl1/worker.ign
+set ip ip=192.168.1.50::192.168.1.254:255.255.255.0:worker-0.pnq.disconnected.cluster.redhatsupport:ens3:none
+set nameserver 192.168.1.2
+set device=sda
+kernel ${kernel} ip=${ip} nameserver=${nameserver} rd.neednet=1 initrd=${initrd} console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=${device} coreos.inst.image_url=${image} coreos.inst.ignition_url=${ignition}
+initrd ${initrd}
+boot || imgfree
+goto start
+
+:exit
+exit
