@@ -20,10 +20,11 @@ podman run --rm -it --privileged --net host -v "$(pwd)/tftpboot:/var/lib/tftpboo
 Press Ctrl+b to get to the iPXE prompt and type in the following commands:
 
 iPXE> dhcp
-iPXE> chain http://192.168.1.100/boot.ipxe
+iPXE> chain http://192.168.33.100/boot.ipxe
 
 ### Build undionly.kpxe with script embedded
-yum install -y xz-devel.x86_64
+yum install -y xz-devel
+yum groupinstall "Development Tools"
 git clone git://git.ipxe.org/ipxe.git
 cd ipxe/src
 cat << EOF > boot.ipxe
@@ -51,5 +52,5 @@ boot
 :back
 exit
 EOF
-make bin/undionly.kpxe EMBED=boot.ipxe
-cp bin/undionly.kpxe tftpboot/
+make bin/undionly.kpxe EMBED=../../tftpboot/boot.ipxe
+cp bin/undionly.kpxe ../../tftpboot/
