@@ -13,7 +13,7 @@ firewall-cmd --add-port=67/udp --permanent
 firewall-cmd --add-port=69/udp --permanent
 firewall-cmd --reload
 
-buildah bud --security-opt label=disable --tag localhost/kevydotvinu/pxe:v1 .
+buildah bud --security-opt label=disable --tag localhost/kevydotvinu/pxe:v1 -f Dockerfile.dnsmasq .
 
 buildah bud --security-opt label=disable --tag localhost/kevydotvinu/apache2:v1 -f Dockerfile.apache2 .
 
