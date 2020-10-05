@@ -34,7 +34,7 @@ podman run --rm \
 	--net host \
 	--volume "$(pwd)/tftpboot/boot.ipxe:/var/www/localhost/htdocs/boot.ipxe" \
 	--security-opt label=disable \
-	--name=apache localhost/kevydotvinu/apache:v1
+	--name=apache localhost/kevydotvinu/apache2:v1
 
 ### Boot from iPXE boot script
 Press Ctrl+b to get to the iPXE prompt and type in the following commands:
