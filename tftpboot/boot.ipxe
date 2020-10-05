@@ -6,11 +6,11 @@ set image http://192.168.1.2:8080/rhcos.raw.gz
 
 :start
 menu OpenShift Container Platform
-item --gap --             ------------------------ Cluster Installer ------------------------------
+item --gap --             ---------------------------- Cluster Installer --------------------------
 item Bootstrap0 Bootstrap-0
 item Master0 Master-0
 item Worker0 Worker-0
-item --gap --             ----------------------------- Options -----------------------------------
+item --gap --             --------------------------------- Options -------------------------------
 item exit Exit
 choose --timeout 20000 --default back target && goto ${target} || goto menu
 

@@ -6,8 +6,14 @@ log-dhcp
 log-queries
 enable-tftp
 tftp-root=/var/lib/tftpboot
-dhcp-range=192.168.33.0,proxy
-dhcp-boot=undionly.kpxe
-pxe-service=x86PC,"Network Boot",undionly.kpxe
-# dhcp-boot=http://10.74.250.40/boot.ipxe
-# pxe-service=x86PC,"iPXE Script",http://10.74.250.40/boot.ipxe
+
+dhcp-range=192.168.33.0,proxy,255.255.255.0
+
+# pxe-service=x86PC,"Network Boot",pxelinux.0
+# dhcp-boot=pxelinux.0
+# dhcp-option-force=209,pxelinux.cfg/default
+
+pxe-service=tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe
+
+dhcp-userclass=set:ipxe,iPXE
+pxe-service=tag:ipxe,x86PC,"iPXE",http://192.168.33.1:8080/boot.ipxe

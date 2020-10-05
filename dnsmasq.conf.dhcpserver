@@ -5,7 +5,24 @@ log-dhcp
 log-queries
 enable-tftp
 tftp-root=/var/lib/tftpboot
-dhcp-boot=undionly.kpxe
-# dhcp-option-force=209,pxelinux.cfg/default
+
 dhcp-range=192.168.33.10,192.168.33.200,12h
 dhcp-host=00:1e:68:c2:ff:ee,192.168.33.54,24h
+
+# dhcp-boot=pxelinux.0
+# dhcp-option-force=209,pxelinux.cfg/default
+
+dhcp-match=set:bios,option:client-arch,0
+dhcp-boot=tag:bios,undionly.kpxe
+
+dhcp-match=set:efi32,option:client-arch,6
+dhcp-boot=tag:efi32,ipxe.efi
+
+dhcp-match=set:efibc,option:client-arch,7
+dhcp-boot=tag:efibc,ipxe.efi
+
+dhcp-match=set:efi64,option:client-arch,9
+dhcp-boot=tag:efi64,ipxe.efi
+
+dhcp-userclass=set:ipxe,iPXE
+dhcp-boot=tag:ipxe,http://192.168.33.1:8080/boot.ipxe

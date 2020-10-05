@@ -14,7 +14,27 @@ firewall-cmd --add-port=69/udp --permanent
 firewall-cmd --reload
 
 buildah bud --security-opt label=disable --tag localhost/kevydotvinu/pxe:v1 .
-podman run --rm -it --privileged --net host -v "$(pwd)/tftpboot:/var/lib/tftpboot" -v "$(pwd)/dnsmasq.conf.dhcpproxy:/etc/dnsmasq.conf" --security-opt label=disable --name=pxe localhost/kevydotvinu/pxe:v1 --interface=vboxnet0
+
+buildah bud --security-opt label=disable --tag localhost/kevydotvinu/apache2:v1 -f Dockerfile.apache2 .
+
+podman run --rm \
+	--interactive \
+	--tty \
+	--privileged \
+	--net host \
+	--volume "$(pwd)/tftpboot:/var/lib/tftpboot" \
+	--volume "$(pwd)/dnsmasq.conf.dhcpproxy:/etc/dnsmasq.conf" \
+	--security-opt label=disable \
+	--name=pxe localhost/kevydotvinu/pxe:v1 \
+	--interface=eth0
+
+podman run --rm \
+	--interactive \
+	--tty --privileged \
+	--net host \
+	--volume "$(pwd)/tftpboot/boot.ipxe:/var/www/localhost/htdocs/boot.ipxe" \
+	--security-opt label=disable \
+	--name=apache localhost/kevydotvinu/apache:v1
 
 ### Boot from iPXE boot script
 Press Ctrl+b to get to the iPXE prompt and type in the following commands:
