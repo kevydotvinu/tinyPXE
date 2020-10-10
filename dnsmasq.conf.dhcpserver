@@ -1,3 +1,4 @@
+port=0
 user=dnsmasq
 except-interface=lo
 bind-interfaces
