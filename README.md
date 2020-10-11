@@ -65,6 +65,7 @@ podman run --rm \
            --name tinypxe localhost/kevydotvinu/pxe:v1 \
            --interface eth0
 ```
+To run the pod in background, replate --rm, --interactive and --tty with --detach.
 
 ### PXE-enabled DHCP Server
 ```bash
@@ -79,6 +80,8 @@ podman run --rm \
            --name tinypxe localhost/kevydotvinu/pxe:v1 \
            --interface eth0
 ```
+To run the pod in background, replate --rm, --interactive and --tty with --detach.
+
 ## iPXE manual booting
 Press <kbd>Ctrl</kbd> + <kbd>b</kbd> and enter below commands:
 ```bash
