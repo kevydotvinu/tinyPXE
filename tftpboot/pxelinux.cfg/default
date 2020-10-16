@@ -24,6 +24,10 @@ MENU PASSWD ashinfo
 KERNEL /netboot/ubuntu-installer/amd64/linux
 APPEND initrd=netboot/ubuntu-installer/amd64/initrd.gz
 
+LABEL iPXE
+KERNEL ipxe.lkrn
+APPEND dhcp && chain http://192.168.33.1:8080/boot.ipxe
+
 LABEL exit
 MENU LABEL Exit
 localboot 0
