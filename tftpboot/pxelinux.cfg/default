@@ -2,32 +2,35 @@ default menu.c32
 prompt 0
 menu title Network Boot
 
-LABEL OpenShift
-KERNEL http://<HTTP_server>/rhcos-<version>-installer-kernel-<architecture>
-APPEND ip=dhcp rd.neednet=1 initrd=http://<HTTP_server>/rhcos-<version>-installer-initramfs.<architecture>.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://<HTTP_server>/rhcos-<version>-metal.<architecture>.raw.gz coreos.inst.ignition_url=http://<HTTP_server>/bootstrap.ign
-
 LABEL Clonezilla
-MENU PASSWD ashinfo
+MENU PASSWD pass
 MENU LABEL Clonezilla
 KERNEL clonezilla/vmlinuz
 APPEND initrd=clonezilla/initrd.img boot=live username=user union=overlay config components quiet noswap edd=on nomodeset nodmraid locales= keyboard-layouts= ocs_live_run="ocs-live-general" ocs_live_extra_param="" ocs_live_batch=no net.ifnames=0 nosplash noprompt fetch=tftp://172.16.1.87/clonezilla/filesystem.squashfs
 
 LABEL WinPE
-MENU PASSWD ashinfo
+MENU PASSWD pass
 MENU Windows PE
 KERNEL memdisk
 INITRD winpe.iso
 APPEND iso raw
 
-LABEL Ubuntu Netboot
-MENU PASSWD ashinfo
+LABEL Ubuntu
+MENU PASSWD pass
 KERNEL /netboot/ubuntu-installer/amd64/linux
 APPEND initrd=netboot/ubuntu-installer/amd64/initrd.gz
 
-LABEL iPXE
+MENU BEGIN
+MENU LABEL iPXE
+LABEL RHCOS
 KERNEL ipxe.lkrn
-APPEND dhcp && chain http://192.168.33.1:8080/boot.ipxe
+APPEND dhcp && chain http://192.168.100.1:8080/rhcos.ipxe
+LABEL Ubuntu+CentOS
+KERNEL ipxe.lkrn
+APPEND dhcp && chain http://192.168.100.1:8080/ubuntucentos.ipxe
+LABEL Return
+MENU Exit
+MENU END
 
-LABEL exit
-MENU LABEL Exit
+LABEL Exit
 localboot 0
