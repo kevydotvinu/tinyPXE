@@ -9,11 +9,11 @@ tftp-root=/var/lib/tftpboot
 
 dhcp-range=192.168.33.0,proxy,255.255.255.0
 
-# pxe-service=x86PC,"Network Boot",pxelinux.0
+pxe-service=tag:#ipxe,x86PC,"Network Boot",pxelinux.0
 # dhcp-boot=pxelinux.0
 # dhcp-option-force=209,pxelinux.cfg/default
 
-pxe-service=tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe
+# pxe-service=tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe
 
 dhcp-userclass=set:ipxe,iPXE
 pxe-service=tag:ipxe,x86PC,"iPXE",http://192.168.33.1:8080/boot.ipxe

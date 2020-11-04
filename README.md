@@ -59,10 +59,11 @@ podman run --rm \
            --tty \
            --privileged \
            --net host \
-           --volume "$(pwd)/tftpboot:/var/lib/tftpboot" \
+           --volume "$(pwd)/boot.ipxe:/var/lib/tftpboot/boot.ipxe" \
+           --volume "$(pwd)/default:/var/lib/tftpboot/pxelinux.cfg/default" \
            --volume "$(pwd)/dnsmasq.conf.dhcpproxy:/etc/dnsmasq.conf" \
            --security-opt label=disable \
-           --name tinypxe localhost/kevydotvinu/pxe:v1 \
+           --name tinypxe localhost/kevydotvinu/tinypxe:v1 \
            --interface eth0
 ```
 To run the pod in background, replate --rm, --interactive and --tty with --detach.
@@ -74,10 +75,11 @@ podman run --rm \
            --tty \
            --privileged \
            --net host \
-           --volume "$(pwd)/tftpboot:/var/lib/tftpboot" \
+           --volume "$(pwd)/boot.ipxe:/var/lib/tftpboot/boot.ipxe" \
+           --volume "$(pwd)/default:/var/lib/tftpboot/pxelinux.cfg/default" \
            --volume "$(pwd)/dnsmasq.conf.dhcpserver:/etc/dnsmasq.conf" 
            --security-opt label=disable \
-           --name tinypxe localhost/kevydotvinu/pxe:v1 \
+           --name tinypxe localhost/kevydotvinu/tinypxe:v1 \
            --interface eth0
 ```
 To run the pod in background, replate --rm, --interactive and --tty with --detach.
